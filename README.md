@@ -1,12 +1,21 @@
 # Kigali Spotter
-this is the backend side of the Kigali Spotter project web
 
- Kigali Spotter is a City Guide system that helps users spot and discover hidden gems and unique experiences in Kigali, offering a fresh perspective on the city's offerings.
+Have you ever struggled to find reliable and up-to-date information about attractions, restaurants, or hotels when exploring a new city?
+
+Welcome to the backend of Kigali Spotter, an innovative City Guide system designed to help users explore and uncover hidden treasures and unique experiences within Kigali. Our platform offers a fresh perspective on the city's attractions, making it easier for travellers and locals alike to discover everything this vibrant city has to offer.
 
 
 ## Problem Statement:
-Many travellers need help finding reliable and up-to-date information about a city's attractions, restaurants, hotels, and shops. Existing resources may require more user-generated reviews and comprehensive listings, leading to frustration and time-consuming research for travellers.
 
+Travellers often face challenges in accessing reliable and up-to-date information about a city's attractions, restaurants, hotels, and shops. Existing resources may lack comprehensive listings or require extensive user-generated content, leading to frustration and time wastage for users
+
+
+## features:
+
+User Authentication
+Explore Listings and Search and Filtering
+User Reviews
+Admin Dashboard
 
 ### How It Works:
 Users visit the website and are greeted with a user-friendly interface showcasing categories such as attractions, restaurants, hotels, and shops.

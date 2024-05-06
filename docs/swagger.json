@@ -1,0 +1,278 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Kigali Spotter",
+    "description": "API documentation for a Kigali Spotter WebApp",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/api/v1",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/signup": {
+      "post": {
+        "summary": "SIGN UP",
+        "description": "SIGN UP",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Authentication"
+            },
+            "required": true,
+            "description": "signup object"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "summary": "LOGIN",
+        "description": "LOGIN FOR AN ALREADY EXISTING ACCOUNT",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Authentication"
+            },
+            "required": true,
+            "description": "SIGN INTO YOUR ACCOUNT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "LOGIN SUCCESSFUL"
+          },
+          "404": {
+            "description": "Account not found"
+          }
+        }
+      }
+    },
+    "/verify": {
+      "put": {
+        "summary": "VERIFY OTP",
+        "description": "VERIFY OTP",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "userOTP",
+            "in": "path",
+            "description": "OTP of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdatePassword"
+            },
+            "required": true,
+            "description": "OTP VERIFIED"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP VERIFIED"
+          },
+          "404": {
+            "description": "OPT EXPIRED"
+          }
+        }
+      }
+    },
+    "/resetPassword": {
+      "post": {
+        "summary": "RESET PASSWORD",
+        "description": "RESET USER PASSWORD",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ResetPassword"
+            },
+            "required": true,
+            "description": "Reset password object"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset successfully"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/createspot": {
+      "post": {
+        "summary": "CREATE A SPOT",
+        "description": "CREATE A NEW SPOT",
+        "tags": ["Spots"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Spot"
+            },
+            "required": true,
+            "description": "New Spot object"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Spot created successfully"
+          }
+        }
+      }
+    },
+    "/updatespot/{id}": {
+      "put": {
+        "summary": "UPDATE SPOT",
+        "description": "UPDATE AN SPOT DETAILS",
+        "tags": ["Spots"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the Spot to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Spot"
+            },
+            "required": true,
+            "description": "Updated Spot object"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Spot updated successfully"
+          },
+          "404": {
+            "description": "Spot not found"
+          }
+        }
+      }
+    },
+    "/deleteSpot/{id}": {
+      "delete": {
+        "summary": "DELETE SPOT",
+        "description": "DELETE SPOT PROFILE AND DETAILS",
+        "tags": ["Spots"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the Spot profile and Details to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Spot deleted successfully"
+          },
+          "404": {
+            "description": "Spot not found"
+          }
+        }
+      }
+    },
+    "/allspots": {
+      "get": {
+        "summary": "GET ALL SPOTS",
+        "description": "GET DETAILS AND LOCATION OF ALL SPOTS",
+        "tags": ["Spots"],
+        "responses": {
+          "200": {
+            "description": "Spots retrieved successfully"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Authentication": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email"
+        },
+        "password": {
+          "type": "string",
+          "description": "User password"
+        }
+      }
+    },
+    "UpdatePassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "New password"
+        }
+      }
+    },
+    "ResetPassword": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email"
+        }
+      }
+    },
+    "Spot": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Spot name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Spot description"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["attraction", "restaurant", "hotel", "shop"],
+          "description": "Spot category"
+        },
+        "location": {
+          "type": "string",
+          "description": "Spot location"
+        },
+        "image": {
+          "type": "string",
+          "description": "Spot image URL"
+        },
+        "path": {
+          "type": "string",
+          "description": "Spot path"
+        }
+      }
+    }
+  }
+}
